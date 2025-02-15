@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { signIn } from "../api/authApi";
-import { AuthContext } from "../contexts/AuthContext"; // Corrected import
+import { AuthContext } from "../contexts/AuthContext";
 import { Container, TextField, Button, Typography, Paper } from "@mui/material";
 
 const SignIn = () => {
@@ -15,12 +15,11 @@ const SignIn = () => {
     try {
       const response = await signIn(email, password);
 
-      // Store token & user in localStorage
-      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("token", response.data.tokens.access.token);
       localStorage.setItem("user", JSON.stringify(response.data.user));
 
       setUser(response.data.user);
-      navigate("/");
+      navigate("/products");
     } catch (error) {
       console.error("Login failed:", error.response?.data?.message || error.message);
     }

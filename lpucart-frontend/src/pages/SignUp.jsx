@@ -19,7 +19,7 @@ const SignUp = () => {
       localStorage.setItem("user", JSON.stringify(response.data.user));
 
       setUser(response.data.user);
-      navigate("/");
+      navigate("/signin");
     } catch (error) {
       console.error("Signup failed:", error.response?.data?.message || error.message);
     }
