@@ -25,12 +25,12 @@ const ProductDetails = () => {
   return (
     <Container sx={{ mt: 4 }}>
       <Card>
-        <CardMedia component="img" height="300" image={product.image || "https://via.placeholder.com/300"} />
+        <CardMedia component="img" height="300" image={product.image} />
         <CardContent>
           <Typography variant="h4">{product.name}</Typography>
           <Typography variant="body1">{product.description}</Typography>
           <Typography variant="h6" color="primary">
-            ${product.price}
+            ${product.cost}
           </Typography>
           <Button variant="contained" color="secondary" sx={{ mt: 2 }}>
             Add to Cart
