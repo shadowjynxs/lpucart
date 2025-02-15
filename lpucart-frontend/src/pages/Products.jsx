@@ -21,6 +21,7 @@ const Products = () => {
       try {
         const response = await getProducts();
         setProducts(response.data);
+        console.log(response.data)
       } catch (error) {
         console.error("Failed to fetch products", error);
       }
@@ -51,12 +52,12 @@ const Products = () => {
                 component="img"
                 image={product.image || "https://via.placeholder.com/200"}
                 alt={product.name}
-                sx={{ height: 200, width: "100%", objectFit: "cover" }} // ✅ Fixed Image Size
+                sx={{ height: 200, width: "100%", objectFit: "cover" }}
               />
               <CardContent sx={{ flexGrow: 1 }}>
                 <Typography variant="h6">{product.name}</Typography>
                 <Typography variant="body2" color="textSecondary">
-                  ${product.price}
+                  ${product.cost}
                 </Typography>
               </CardContent>
               <Button
