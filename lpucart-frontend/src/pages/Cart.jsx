@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { getCart, removeFromCart, updateCartQuantity, checkoutCart } from "../api/cartApi";
 import {
   Container,
@@ -16,39 +16,42 @@ import DeleteIcon from "@mui/icons-material/Delete";
 const Cart = () => {
   const [cart, setCart] = useState([]);
 
-  useEffect(() => {
-    const fetchCart = async () => {
-      try {
-        const response = await getCart();
-        setCart(response.cartItems || []);
-      } catch (error) {
-        console.error("Failed to fetch cart", error);
-      }
-    };
-
-    fetchCart();
+  const fetchCart = useCallback(async () => {
+    try {
+      const response = await getCart();
+      setCart(response.cartItems || []);
+    } catch (error) {
+      console.error("Failed to fetch cart", error);
+    }
   }, []);
+
+  useEffect(() => {
+    fetchCart();
+  }, [fetchCart]);
 
   const handleRemove = async (productId) => {
     try {
       await removeFromCart(productId);
-      setCart(cart.filter((item) => item.product._id !== productId));
+      setCart((prevCart) => prevCart.filter((item) => item.product._id !== productId));
     } catch (error) {
-      console.error(error);
+      console.error("Error removing item:", error);
     }
   };
 
   const handleQuantityChange = async (productId, quantity) => {
-    if (quantity < 1) return;
+    if (quantity < 0) return;
     try {
       await updateCartQuantity(productId, quantity);
-      setCart(
-        cart.map((item) =>
+      if(quantity == 0){
+        fetchCart()
+      }
+      setCart((prevCart) =>
+        prevCart.map((item) =>
           item.product._id === productId ? { ...item, quantity } : item
         )
       );
     } catch (error) {
-      console.error(error);
+      console.error("Error updating quantity:", error);
     }
   };
 
@@ -56,9 +59,9 @@ const Cart = () => {
     try {
       await checkoutCart();
       alert("Checkout successful!");
-      setCart([]);
+      setCart([]); 
     } catch (error) {
-      console.error(error);
+      console.error("Checkout failed:", error);
     }
   };
 
@@ -93,10 +96,9 @@ const Cart = () => {
                   <TextField
                     type="number"
                     size="small"
-                    value={item.quantity || 1}
+                    value={item.quantity || 0}
                     onChange={(e) => handleQuantityChange(item.product._id, parseInt(e.target.value))}
                     sx={{ width: 60, mr: 1 }}
-                    inputProps={{ min: 1 }}
                   />
                   <IconButton color="error" onClick={() => handleRemove(item.product._id)}>
                     <DeleteIcon />
