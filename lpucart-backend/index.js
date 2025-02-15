@@ -4,10 +4,18 @@ const config = require("./config/config");
 const router = require("./routes/index")
 const passport = require("passport");
 const { jwtStrategy } = require("./config/passport");
+const cors = require("cors");
+
 const app = express()
 mongoose.connect(config.mongoose.url).then(()=>{
     console.log("connected to mongodb")
 })
+
+
+app.use(cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+}));
 
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
