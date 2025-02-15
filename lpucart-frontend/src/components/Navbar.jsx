@@ -12,8 +12,8 @@ const Navbar = () => {
         <Typography variant="h6" sx={{ flexGrow: 1 }}>
           LPUCart
         </Typography>
-        <Button color="inherit" component={Link} to="/">
-          Home
+        <Button color="inherit" component={Link} to="/products">
+          Products
         </Button>
         {user ? (
           <>

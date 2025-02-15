@@ -8,7 +8,7 @@ import ProductDetails from "../pages/ProductDetails";
 const AppRoutes = () => {
   return (
     <Routes>
-      <Route path="/" element={<Products />} />
+      <Route path="/" element={<SignIn />} />
       <Route path="/signin" element={<SignIn />} />
       <Route path="/signup" element={<SignUp />} />
       <Route path="/products" element={<Products />} />

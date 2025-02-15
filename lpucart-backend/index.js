@@ -13,7 +13,7 @@ mongoose.connect(config.mongoose.url).then(()=>{
 
 
 app.use(cors({
-    origin: "https://lpucart.onrender.com/",
+    origin: ["https://lpucart.onrender.com/","http://localhost:5137/"],
     credentials: true,
 }));
 
