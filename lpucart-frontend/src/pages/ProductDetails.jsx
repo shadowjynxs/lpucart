@@ -11,6 +11,7 @@ const ProductDetails = () => {
     const fetchProduct = async () => {
       try {
         const response = await getProductById(id);
+        console.log(response)
         setProduct(response.data);
       } catch (error) {
         console.error("Failed to fetch product", error);

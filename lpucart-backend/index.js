@@ -15,6 +15,7 @@ mongoose.connect(config.mongoose.url).then(()=>{
 app.use(cors({
     origin: [/https:\/\/lpucart\.onrender\.com$/, /http:\/\/localhost:\d+$/],
     credentials: true,
+    optionsSuccessStatus: 200,
 }));
 
 
