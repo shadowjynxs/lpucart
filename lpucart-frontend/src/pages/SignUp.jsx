@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { signUp } from "../api/authApi";
-import { AuthContext } from "../contexts/AuthContext"; // Corrected import
+import { AuthContext } from "../contexts/AuthContext";
 import { Container, TextField, Button, Typography, Paper } from "@mui/material";
 
 const SignUp = () => {

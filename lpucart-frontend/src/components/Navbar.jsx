@@ -1,10 +1,10 @@
 import React from "react";
-import { useAuth } from "../contexts/AuthContext"; // ✅ Correct import
+import { useAuth } from "../contexts/AuthContext"; 
 import { Link } from "react-router-dom";
 import { AppBar, Toolbar, Button, Typography } from "@mui/material";
 
 const Navbar = () => {
-  const { user, logout } = useAuth(); // ✅ Using useAuth hook
+  const { user, logout } = useAuth(); 
 
   return (
     <AppBar position="static">
